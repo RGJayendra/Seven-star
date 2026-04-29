@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7Star Salon Makuluwa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --charcoal: #1C1C1C;
+    --white: #F5F0E8;
+    --grey: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: var(--black);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.05) 0%, transparent 50%);
+  }
+
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-lines::before, .hero-lines::after {
+    content: '';
+    position: absolute;
+    border: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .hero-lines::before {
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-ring 6s ease-in-out infinite;
+  }
+
+  .hero-lines::after {
+    width: 900px; height: 900px;
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-ring 6s ease-in-out infinite 1s;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.02); }
+  }
+
+  .star-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 18vw, 14rem);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(201,168,76,0.25);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stars-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stars-row span {
+    color: var(--gold);
+    font-size: 1.4rem;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  .stars-row span:nth-child(2) { animation-delay: 0.3s; }
+  .stars-row span:nth-child(3) { animation-delay: 0.6s; }
+  .stars-row span:nth-child(4) { animation-delay: 0.9s; }
+  .stars-row span:nth-child(5) { animation-delay: 1.2s; }
+  .stars-row span:nth-child(6) { animation-delay: 1.5s; }
+  .stars-row span:nth-child(7) { animation-delay: 1.8s; }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero h1 span { color: var(--gold); }
+
+  .hero-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.4em;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .divider-gold {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 1.5rem auto;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    color: rgba(245,240,232,0.6);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: rgba(255,255,255,0.2);
+    transition: left 0.4s ease;
+  }
+
+  .btn-primary:hover::before { left: 100%; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline:hover {
+    background: rgba(201,168,76,0.1);
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--grey);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    font-family: 'Bebas Neue', sans-serif;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 6rem 2rem; }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.4em;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── SERVICES ─── */
+  .services {
+    background: var(--dark);
+    position: relative;
+  }
+
+  .services::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .services-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .service-card {
+    background: var(--dark);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+  }
+
+  .service-card:hover {
+    background: var(--charcoal);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery {
+    background: var(--black);
+    position: relative;
+  }
+
+  .gallery-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .gallery-header {
+    margin-bottom: 3rem;
+  }
+
+  .gallery-note {
+    font-style: italic;
+    color: var(--grey);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .gallery-item::before {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(201,168,76,0.5);
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .gallery-item:hover::before {
+    background: rgba(201,168,76,0.05);
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.3);
+  }
+
+  .gallery-scissors {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.05;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  /* ─── INFO STRIP ─── */
+  .info-strip {
+    background: var(--gold);
+    color: var(--black);
+    padding: 2.5rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: center;
+  }
+
+  .info-item .icon { font-size: 1.8rem; }
+
+  .info-item strong {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .info-item span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact {
+    background: var(--charcoal);
+    position: relative;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .contact-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .contact-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .contact-row .c-icon {
+    font-size: 1.4rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-row .c-text strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-row .c-text a,
+  .contact-row .c-text span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-row .c-text a:hover { color: var(--gold); }
+
+  /* Decorative number */
+  .contact-deco {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .deco-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: slow-spin 30s linear infinite;
+  }
+
+  @keyframes slow-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .deco-circle::before {
+    content: '';
+    position: absolute;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .deco-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: var(--gold);
+    line-height: 1;
+    animation: slow-spin 30s linear infinite reverse;
+  }
+
+  .deco-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gold-light);
+    animation: slow-spin 30s linear infinite reverse;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+    color: var(--grey);
+    font-style: italic;
+  }
+
+  .footer-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-deco { display: none; }
+    .info-strip { gap: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+  }
+
+  /* Always open badge */
+  .open-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: #4ade80;
+    padding: 0.3rem 0.8rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+
+  .open-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    animation: blink 1.5s ease infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">7★ Salon</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-lines"></div>
+  <div class="star-badge">7★</div>
+  <div class="hero-content">
+    <div class="open-badge">Always Open</div>
+    <div class="stars-row">
+      <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+    </div>
+    <h1><span>7Star</span> Salon</h1>
+    <p class="hero-sub">Makuluwa</p>
+    <div class="divider-gold"></div>
+    <p class="hero-tagline">Hair Cut · Color · Rebonding · Relax · Tattoos</p>
+    <div class="hero-cta">
+      <a href="tel:+94779088961" class="btn-primary">📞 Book Now</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-item">
+    <span class="icon">🕐</span>
+    <strong>Hours</strong>
+    <span>Always Open</span>
+  </div>
+  <div class="info-item">
+    <span class="icon">📞</span>
+    <strong>WhatsApp</strong>
+    <span>+94 77 908 8961</span>
+  </div>
+  <div class="info-item">
+    <span class="icon">📍</span>
+    <strong>Location</strong>
+    <span>Makuluwa, Galle</span>
+  </div>
+  <div class="info-item">
+    <span class="icon">🌐</span>
+    <strong>Website</strong>
+    <span>7starsalon.com</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title">Premium Services</h2>
+      <div class="divider-gold"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">✂️</span>
+        <h3>Hair Cutting</h3>
+        <p>Precision cuts tailored to your face shape and personal style.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎨</span>
+        <h3>Hair Coloring</h3>
+        <p>Vibrant, long-lasting color treatments and highlights.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💫</span>
+        <h3>Rebonding</h3>
+        <p>Silky-smooth straightening for perfectly manageable hair.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💆</span>
+        <h3>Relaxation</h3>
+        <p>Rejuvenating scalp and body treatments to unwind.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🖋️</span>
+        <h3>Tattoos</h3>
+        <p>Custom tattoo art with precision and creativity.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">👑</span>
+        <h3>VIP Experience</h3>
+        <p>Premium grooming experience with personalized attention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <span class="section-label">Our Work</span>
+      <h2 class="section-title">Gallery</h2>
+      <p class="gallery-note">Expert cuts, precise fades & artistic styles</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" data-label="Fade Cut">
+        <span class="gallery-scissors">✂</span>
+      </div>
+      <div class="gallery-item" data-label="Precision Fade">
+        <span class="gallery-scissors">✂</span>
+      </div>
+      <div class="gallery-item" data-label="Classic Style">
+        <span class="gallery-scissors">✂</span>
+      </div>
+      <div class="gallery-item" data-label="V-Fade Design">
+        <span class="gallery-scissors">✂</span>
+      </div>
+      <div class="gallery-item" data-label="Side Fade">
+        <span class="gallery-scissors">✂</span>
+      </div>
+      <div class="gallery-item" data-label="Modern Fade">
+        <span class="gallery-scissors">✂</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <span class="section-label">Get In Touch</span>
+      <h2>Visit Us<br>Anytime</h2>
+      <div class="divider-gold" style="margin-left:0;"></div>
+      <div class="contact-details">
+        <div class="contact-row">
+          <span class="c-icon">📞</span>
+          <div class="c-text">
+            <strong>WhatsApp / Phone</strong>
+            <a href="tel:+94779088961">+94 77 908 8961</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="c-icon">💬</span>
+          <div class="c-text">
+            <strong>Messenger</strong>
+            <a href="https://facebook.com/7star-salon-makuluwa">7star salon makuluwa</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="c-icon">🌐</span>
+          <div class="c-text">
+            <strong>Website</strong>
+            <a href="http://7starsalon.com">7starsalon.com</a>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="c-icon">🕐</span>
+          <div class="c-text">
+            <strong>Opening Hours</strong>
+            <span>Always Open — 24/7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-deco">
+      <div class="deco-circle">
+        <span class="deco-num">7★</span>
+        <span class="deco-word">Makuluwa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">7Star Salon Makuluwa</div>
+  <p>Hair Cutting · Coloring · Rebonding · Relaxation · Tattoos</p>
+  <div class="footer-links">
+    <a href="tel:+94779088961">Call Us</a>
+    <a href="http://7starsalon.com">Website</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
